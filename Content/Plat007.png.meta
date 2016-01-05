@@ -1,0 +1,20 @@
+ImageContent = 
+{
+	SpriteSourceBuilder = 
+	{
+		string Name = "Plat007",
+		uint64 ResourceId = 569be3500ade43f7,
+		uint64 AtlasId = 5274cf95e4a661fd,
+		uint FrameSizeX = 42,
+		uint FrameSizeY = 35,
+		uint FrameCount = 1,
+		float FrameDelay = 0.0833333358,
+		float OriginX = 21,
+		float OriginY = 17,
+		float PixelsPerUnit = 42,
+		bool Smoothing = true,
+		bool Looping = true,
+		Vec4 Slices = [0, 0, 0, 0],
+		SpriteFill Fill = Stretch,
+	},
+},

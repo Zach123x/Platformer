@@ -1,0 +1,43 @@
+class PlayerMovement : ZilchComponent
+{
+    var Jumps: Real = 0;
+    function Initialize(init : CogInitializer)
+    {
+        Zero.Connect(this.Space, Events.LogicUpdate, this.OnLogicUpdate);
+    }
+
+    function OnLogicUpdate(event : UpdateEvent)
+    {
+        
+        var movement = Real3(0,0,0);
+        if(Zero.Keyboard.KeyIsPressed(Keys.W) && this.Jumps < 2)
+        {
+            this.Owner.SweptController.JumpUnconditionally();
+            this.Jumps += 1;
+            this.Owner.Sprite.CurrentFrame = 6;
+            this.Owner.Sprite.AnimationActive = false;
+        }
+        if(Zero.Keyboard.KeyIsDown(Keys.A))
+        {
+            movement.X -= 1;
+            this.Owner.Sprite.FlipX = true;
+            this.Owner.Sprite.AnimationActive = true;
+        }
+        if(Zero.Keyboard.KeyIsDown(Keys.D))
+        {
+            movement.X += 1;
+            this.Owner.Sprite.FlipX = false;
+            this.Owner.Sprite.AnimationActive = true;
+        }
+        if(this.Owner.SweptController.Grounded == true)
+        {
+            this.Jumps = 0;
+        }
+        if(Zero.Keyboard.KeyIsUp(Keys.A) && Zero.Keyboard.KeyIsUp(Keys.D) && Zero.Keyboard.KeyIsUp(Keys.W))
+        {
+            this.Owner.Sprite.AnimationActive = false;
+            this.Owner.Sprite.CurrentFrame = 0;
+        }
+        this.Owner.SweptController.Update(movement, event.Dt);
+    }
+}
